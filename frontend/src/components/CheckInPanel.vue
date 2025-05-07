@@ -157,6 +157,18 @@ const handleEmployeeCheckin = () => {
 }
 
 const submitLog = (logType) => {
+	// Validate if latitude and longitude are valid (greater than 0)
+	if (latitude.value <= 0 || longitude.value <= 0) {
+		toast({
+			title: __("Error"),
+			text: __("Unable to retrieve valid location. Please try again."),
+			icon: "alert-circle",
+			position: "bottom-center",
+			iconClasses: "text-red-500",
+		})
+		return
+	}
+
 	const actionLabel = logType === "IN" ? __("Check-in") : __("Check-out")
 
 	checkins.insert.submit(
